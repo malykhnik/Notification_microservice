@@ -9,7 +9,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
@@ -33,8 +33,14 @@ spring:
             enable: true
           starttls:
             enable: true
-
     default-encoding: UTF-8
+  kafka:
+    consumer:
+      bootstrap-servers: kafka:9092
+      group-id: my-group  # Уникальная группа Consumer
+      auto-offset-reset: earliest  # Начать с самого начала, если не нашли смещения
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 url:
   tg:
     key: "http://localhost:9001"

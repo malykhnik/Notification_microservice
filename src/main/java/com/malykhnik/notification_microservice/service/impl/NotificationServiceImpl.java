@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,10 @@ public class NotificationServiceImpl implements NotificationService {
     @Value("${url.tg_req.key}")
     String TG_REQUEST;
     @Override
+    @KafkaListener(topics = "my-topic", groupId = "my-group")
     public void sendToMail(String messageTxt) {
-        LOGGER.info("ВЫЗВАНА ФУНКЦИЯ sendMail");
+        LOGGER.info("ВЫЗВАНА ФУНКЦИЯ sendMail ");
+        LOGGER.info("Получил из Kafka: " + messageTxt);
         Thread thread = new Thread(() -> {
             List<Email> emails = emailRepo.findAll();
             for (Email email : emails) {

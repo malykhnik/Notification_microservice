@@ -1,0 +1,5 @@
+CREATE TABLE emails
+(
+    id       SERIAL PRIMARY KEY,
+    receiver VARCHAR(255) UNIQUE NOT NULL
+);

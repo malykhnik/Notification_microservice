@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: Notification_microservice
+  datasource:
+    url: jdbc:postgresql://notification-microservice-db:5432/notification_db
+#    url: jdbc:postgresql://localhost:5432/notification_db
+    password: postgres
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+  mail:
+    host: smtp.mail.ru
+    port: 465
+    username: nik.malykh.2024@mail.ru
+    password: PLmpfSCAvDhCzrtzYSiw
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+          starttls:
+            enable: true
+    default-encoding: UTF-8
+  kafka:
+    consumer:
+      bootstrap-servers: kafka:9092
+      group-id: my-group  # Уникальная группа Consumer
+      auto-offset-reset: earliest  # Начать с самого начала, если не нашли смещения
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+url:
+  tg:
+    key: "http://localhost:9001"
+  tg_req:
+    key: "/notify"
+
+email:
+  from: "nik.malykh.2024@mail.ru"
+
+server:
+  port: 8083

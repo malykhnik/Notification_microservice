@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "emails")
 @Data
@@ -13,8 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Email {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
 
     @Column(unique = true)
     private String receiver;
